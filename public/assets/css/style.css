@@ -1,0 +1,406 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* ========================
+   VARIABLES Y BASE
+======================== */
+:root {
+    --iu: #d93025; --inu: #f4b400; --niu: #4285f4; --ninu: #9aa0a6;
+    --google-blue: #1a73e8;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f1f3f4;
+    color: #3c4043;
+    margin: 0; padding: 20px;
+}
+
+/* ========================
+   CONTROLES DE VISTA (Botones Mes/Día)
+======================== */
+.view-controls {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.view-controls button {
+    background: white;
+    border: 1px solid #dadce0;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #3c4043;
+}
+
+.view-controls button:hover {
+    background: #f8f9fa;
+}
+
+/* ========================
+   FORMULARIO Y PROGRESO
+======================== */
+#taskForm {
+    display: flex; gap: 10px; align-items: center;
+    background: #fff; padding: 15px; border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(60,64,67,0.3); margin-bottom: 20px;
+}
+
+#taskForm input, #taskForm select {
+    border: 1px solid #dadce0; padding: 8px 12px; border-radius: 4px; outline: none;
+}
+
+#taskForm button {
+    background: var(--google-blue); color: #fff; border: none;
+    padding: 8px 24px; border-radius: 4px; font-weight: 500; cursor: pointer;
+}
+
+.progress-container {
+    background: #fff; padding: 15px; border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(60,64,67,0.3); margin-bottom: 20px;
+}
+
+.progress-bar-bg { background: #e8eaed; height: 8px; border-radius: 4px; overflow: hidden; }
+.progress-bar-fill { background: var(--google-blue); height: 100%; width: 0%; transition: width 0.5s; }
+
+/* ========================
+   VISTA MENSUAL (GRID)
+======================== */
+.day-headers {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    text-align: center; font-weight: 500; background: #fff;
+    padding: 10px 0; border: 1px solid #dadce0; color: #70757a;
+    border-top-left-radius: 8px; border-top-right-radius: 8px;
+}
+
+.month-grid {
+    display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px;
+    background: #dadce0; border: 1px solid #dadce0; border-radius: 0 0 8px 8px; overflow: hidden;
+}
+
+.month-day {
+    background: #fff; min-height: 120px; padding: 8px;
+    display: flex; flex-direction: column; transition: background 0.2s;
+}
+
+.month-day:hover { background: #f8f9fa; }
+
+/* Círculo de hoy */
+.is-today { background: #e8f0fe !important; }
+.is-today header span {
+    background: var(--google-blue); color: #fff !important;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+}
+
+/* ========================
+   VISTA DIARIA (TIME BLOCKING)
+======================== */
+.day-view-container {
+    background: white; border-radius: 8px; padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.day-header-info {
+    display: flex !important;
+    justify-content: flex-start !important; /* Todo a la izquierda */
+    align-items: center !important;
+    gap: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}f
+
+/* Ajuste del Grid de tiempo */
+.time-row {
+    display: grid;
+    grid-template-columns: 60px 1fr; /* Columna de hora y columna de tarea */
+}
+
+.time-slot-label {
+    height: 60px; font-size: 11px; color: #70757a;
+    text-align: right; padding-right: 12px;
+    border-right: 1px solid #dadce0;
+    line-height: 1; margin-top: -5px;
+}
+
+.time-slot-content {
+    height: 60px; border-bottom: 1px solid #edf0f2;
+    position: relative; padding: 2px;
+}
+
+/* ========================
+   TAREAS (Píldoras)
+======================== */
+.month-task {
+    font-size: 0.75rem; padding: 4px 8px; margin-bottom: 2px;
+    border-radius: 4px; color: #fff; cursor: pointer;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.completed { text-decoration: line-through !important; opacity: 0.5; filter: grayscale(1); }
+
+/* Prioridades */
+.importante-urgente { background: var(--iu) !important; }
+.importante-no-urgente { background: var(--inu) !important; }
+.no-importante-urgente { background: var(--niu) !important; }
+.no-importante-no-urgente { background: var(--ninu) !important; }
+
+#taskList li {
+    list-style: none; padding: 6px 15px; border-radius: 20px;
+    margin: 5px; color: white; font-size: 13px; font-weight: 500;
+}
+
+
+/* Media Query para móviles */
+@media (max-width: 768px) {
+    /* El formulario de agregar tarea ahora será en una sola columna */
+    #taskForm {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Reducimos el tamaño de las celdas del calendario */
+    .month-day {
+        min-height: 70px; /* Más corto para que quepa en pantalla */
+        font-size: 0.8rem;
+    }
+
+    /* Ocultamos los nombres largos de los días para ahorrar espacio */
+    .day-headers div {
+        font-size: 0.7rem;
+        padding: 5px 0;
+    }
+
+    /* En la vista diaria, hacemos la columna de horas más estrecha */
+    .time-slot-label {
+        width: 40px;
+        font-size: 0.7rem;
+    }
+
+    /* Hacemos que las tareas en el calendario mensual solo muestren un punto 
+       o texto muy corto para no romper la celda */
+    .month-task {
+        font-size: 0.65rem;
+        padding: 2px 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+
+@media (max-width: 600px) {
+    /* Hacemos los inputs más grandes para el tacto */
+    input, select, button {
+        height: 45px;
+        font-size: 16px !important; /* Evita que el iPhone haga zoom automático */
+    }
+
+    /* Ajustamos el calendario para que no se vea tan estirado */
+    .month-day {
+        min-height: 80px;
+    }
+
+    /* Los indicadores de tareas del día (etiquetas rojas) */
+    .day-tasks-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+}
+
+
+/* ========================
+   NAVEGACIÓN (Flechas y Títulos)
+======================== */
+.day-navigation, .month-header {
+    display: flex;
+    align-items: center; /* Alineación vertical al centro */
+    justify-content: flex-start; /* Todo hacia la izquierda */
+    gap: 15px; /* Espacio uniforme entre elementos */
+    margin: 20px 0;
+}
+
+/* Forzamos que los títulos no tengan margen que rompa la línea */
+.day-navigation h2, .month-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.btn-nav {
+    background: #ffffff;
+    border: 1px solid #dadce0;
+    border-radius: 4px; /* Cambiado a cuadrado redondeado para coincidir con tu captura */
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0; /* Limpiamos padding para que sea un cuadrado perfecto */
+    transition: all 0.2s;
+    flex-shrink: 0; /* Evita que el botón se aplaste si el texto es largo */
+}
+
+.btn-nav:hover {
+    background-color: #f8f9fa;
+    border-color: #bdc1c6;
+}
+
+.day-navigation {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 !important; /* Quitamos márgenes que puedan empujar */
+}
+
+/* Forzamos que el título h2 no tenga márgenes propios */
+.day-navigation h2, #currentDayTitle {
+    margin: 0 !important;
+    padding: 0 0 0 10px !important; /* Un poco de espacio a la izquierda del texto */
+    font-size: 1.5rem;
+    line-height: 1;
+    display: inline-block;
+}
+
+.btn-nav {
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.day-navigation, .month-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.day-navigation h2, #currentDayTitle {
+    margin: 0;
+    padding-left: 10px;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.btn-nav {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+
+.btn-nav:hover {
+    background-color: #f8f9fa;
+    border-color: #bdc1c6;
+}
+
+/* Contenedor principal de la lista */
+/* Contenedor principal de la lista */
+#taskList {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    padding: 10px !important;
+    margin: 15px 0 !important;
+    list-style: none !important;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    
+    /* CONFIGURACIÓN CRÍTICA DEL SCROLL */
+    max-height: 310px !important; /* Limita el alto a unas 6 tareas */
+    overflow-y: auto !important;  /* Muestra el scroll si hay más de 6 */
+    overflow-x: hidden !important; 
+}
+
+/* Estilo para las píldoras rojas */
+#taskList li {
+    padding: 10px 15px;
+    border-radius: 20px;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Mensaje de "No hay tareas" */
+#noTasksMsg {
+    color: #70757a;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Hacer la barra de scroll más estética */
+#taskList::-webkit-scrollbar {
+    width: 6px;
+}
+#taskList::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+
+/* ========================
+   FORMULARIO – OPTIMIZADO PARA MÓVIL
+======================== */
+@media (max-width: 600px) {
+
+    #taskForm {
+        padding: 15px;
+        gap: 12px;
+    }
+
+    /* Inputs ocupan todo el ancho */
+    #taskForm input,
+    #taskForm select,
+    #taskForm button {
+        width: 100%;
+    }
+
+    /* Agrupamos fecha + hora en una sola fila */
+    .date-time-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        width: 100%;
+    }
+
+    /* Inputs táctiles */
+    #taskForm input,
+    #taskForm select {
+        height: 48px;
+        font-size: 15px;
+    }
+
+    /* Botón más grande y claro */
+    #taskForm button {
+        height: 50px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 6px;
+    }
+}
+

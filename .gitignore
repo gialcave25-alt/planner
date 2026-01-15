@@ -1,0 +1,11 @@
+# Configuración sensible
+app/db.php
+
+# Entorno
+.env
+
+# Editor
+.vscode/
+
+# Logs
+*.log
