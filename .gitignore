@@ -1,5 +1,5 @@
 # Configuración sensible
-app/db.php
+
 
 # Entorno
 .env
