@@ -11,10 +11,10 @@ if ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_ADDR'] === '127.
 } else {
     // Configuración para HOSTINGER
     // RECUERDA: Cambia estos valores cuando crees la DB en tu panel de Hostinger
-    $host = "localhost"; 
-    $db   = "u330678156_planner_db"; // Ejemplo de nombre en Hostinger
-    $user = "u330678156_giovannycastro";   // Ejemplo de usuario en Hostinger
-    $pass = "Valeria12092006.";
+    $host = ""; 
+    $db   = ""; // Ejemplo de nombre en Hostinger
+    $user = "";   // Ejemplo de usuario en Hostinger
+    $pass = "";
 }
 
 try {
