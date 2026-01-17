@@ -5,8 +5,8 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 header("Content-Type: application/json");
-require "../../app/db.php"; 
-require "../../app/auth.php"; 
+require "../app/db.php"; 
+require "../app/auth.php";
 
 // Obtenemos el ID de la sesión
 $user_id = $_SESSION['user_id'] ?? null;

@@ -404,3 +404,105 @@ body {
     }
 }
 
+
+/* --- 1. Estilos para el Login (index.php) --- */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.login-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-card h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.login-card input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* --- 2. Botón de Logout (Dashboard) --- */
+.logout-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #ff4d4d;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #cc0000;
+}
+
+/* --- 3. Estilos de la Lista de Actividades y Botón Borrar --- */
+#taskList {
+    list-style: none;
+    padding: 0;
+}
+
+#taskList li {
+    background: #fff;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-left: 5px solid #4CAF50; /* Verde para identificar tareas */
+}
+
+.btn-delete {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.btn-delete:hover {
+    background-color: #ffe5e5;
+    transform: scale(1.1);
+}
+
+/* Ajuste para móviles */
+@media (max-width: 600px) {
+    #taskList li {
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    .login-card {
+        margin: 20px;
+        padding: 25px;
+    }
+}

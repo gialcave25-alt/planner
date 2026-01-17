@@ -5,13 +5,21 @@ document.addEventListener("DOMContentLoaded", fetchData);
 
 async function fetchData() {
     try {
-        const res = await fetch("api/tasks.php");
+        const res = await fetch("api/tasks.php", {
+            credentials: "include"
+        });
+
+        if (!res.ok) {
+            throw new Error("No autorizado o error API");
+        }
+
         allTasks = await res.json();
-        renderAll(); // Esto redibuja todo y debe disparar el progreso
+        renderAll();
     } catch (error) {
         console.error("Error cargando tareas:", error);
     }
 }
+
 
 function renderAll() {
     renderList();     
@@ -243,6 +251,7 @@ document.getElementById("taskForm").addEventListener("submit", async e => {
 
     await fetch("api/tasks.php", {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
     });
@@ -254,6 +263,7 @@ document.getElementById("taskForm").addEventListener("submit", async e => {
 async function toggleTask(id, currentStatus) {
     await fetch("api/tasks.php", {
         method: "PUT",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id, completed: currentStatus == 1 ? 0 : 1 })
     });
@@ -263,6 +273,7 @@ async function toggleTask(id, currentStatus) {
 async function deleteTask(id) {
     await fetch("api/tasks.php", {
         method: "DELETE",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id })
     });

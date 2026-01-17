@@ -1,10 +1,26 @@
-<?php require "../app/auth.php"; ?>
+<?php
+// 1. Activar errores para diagnóstico
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// 2. Corregir la ruta (Quitamos los puntos ../ porque ya estás en la raíz)
+require_once "app/auth.php"; 
+require_once "app/db.php"; // Asegúrate de incluir la conexión aquí también
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planner Pro</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <script src="assets/js/planner.js"></script>.
+    <link rel="stylesheet" href="assets/css/style.css">.
 </head>
 <body>
 
@@ -71,7 +87,6 @@
     <div id="monthView" class="month-grid"></div>
 </div>
 
-<script src="assets/js/planner.js" defer></script>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
